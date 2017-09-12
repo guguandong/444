@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="style/weibo.css" rel="stylesheet" type="text/css"/>
+    <script src="ajax.js"></script>
+   
+    
+</head>
+
+<body>
+<div class="znsArea" id="message" style="opacity: 1;">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="t1"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" id="btn1"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="msg_box">
+            <div class="reply" id="reply_tpl">
+                <p class="replyContent"></p>
+                <p class="operation">
+                    <span class="replyTime" style="color:red"></span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top"></a>
+                        <a href="javascript:;" class="down_icon"></a>
+                        <a href="javascript:;" class="cut" id="cut">删除</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="page" id="page">
+   
+            
+        </div>
+    </div>
+</div>
+ <script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+ <script type="text/javascript">
+     btn1.onclick=function  () {
+		$.ajax({
+			type:"get",
+			url:"weibo.php",
+			async:true,
+			data:{
+				act:"add",
+				content:t1.value
+			},
+			success:function  (data) {
+				$(".replyContent").append(t1.value)
+				var time=new Date()
+				$(".replyTime").append(time)
+			}
+		})
+	}
+     cut.onclick=function(){
+     	$(".reply_tpl").remove(reply_tpl)
+     }
+     
+     
+    </script>
+
+
+
+</body>
+   
+</html>
